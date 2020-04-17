@@ -3,16 +3,16 @@ import { generateId } from '@/utils'
 export const defaultWorksList = [
   {
     workId: generateId(),
-    name: 'Mote Bhaiya',
-    work: 'Pagalitee',
-    client: 'Corona',
-    status: 'Chalti raheti!'
+    name: 'John Doe',
+    work: 'Documentation',
+    client: 'Annie Siebert',
+    status: 'In Progress'
   },
   {
     workId: generateId(),
-    name: 'Jada Mote Bhaiya',
-    work: 'Maha Pagalitee',
-    client: 'Corona Virus',
-    status: 'Chalti raheti!'
+    name: 'Natalie',
+    work: 'Component Testing',
+    client: 'Mr. Henry Kyle',
+    status: 'On stand-by'
   }
 ]
