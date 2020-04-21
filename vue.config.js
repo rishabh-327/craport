@@ -2,7 +2,7 @@ module.exports = {
   transpileDependencies: ['vuetify'],
   chainWebpack: config => {
     config.plugin('html').tap(args => {
-      args[0].title = 'Work Tracker'
+      args[0].title = 'Craport'
       return args
     })
   }

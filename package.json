@@ -1,5 +1,5 @@
 {
-  "name": "work-tracker",
+  "name": "craport",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "moment": "^2.24.0",
+    "typeface-raleway": "0.0.75",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
     "vuetify": "^2.2.11",

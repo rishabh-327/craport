@@ -1,20 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Dashboard from '@/views/Dashboard.vue'
-import EditTask from '@/components/EditTask.vue'
+import Home from '@/views/Home.vue'
+import Report from '@/views/Report/Report.vue'
+import EditWork from '@/views/Report/EditWork.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'dashboard',
-    component: Dashboard,
+    name: 'home',
+    component: Home
+  },
+  {
+    path: '/report/:id',
+    name: 'report',
+    component: Report,
+    props: true,
     children: [
       {
         path: '/edit/:workId',
-        name: 'edit-task',
-        component: EditTask,
+        name: 'edit-work',
+        component: EditWork,
         props: true
       }
     ]

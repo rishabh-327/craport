@@ -1,6 +1,7 @@
 <template>
-  <v-card width="450" class="task-dialog" flat color="grey lighten-5">
+  <v-card width="450" class="work-dialog" flat color="grey lighten-5">
     <v-form ref="newForm">
+      <!-- Close Button -->
       <v-btn
         icon
         absolute
@@ -10,68 +11,78 @@
       >
 
       <!-- Heading -->
-      <v-container fluid class="text-center py-6 green accent-1">
-        <h1 class="display-1 font-weight-regular grey--text text--darken-4">
+      <v-container fluid class="text-center px-0">
+        <h1 class="display-1 font-weight-black grey--text text--darken-4 py-6">
           Add New Entry
         </h1>
+        <v-divider></v-divider>
       </v-container>
 
       <!-- Input Fields -->
       <v-container>
         <v-row justify="center">
-          <v-col cols="9">
+          <v-col cols="10">
             <v-text-field
               name="name"
               label="Name"
+              :rules="rules"
               color="green accent-2"
               autocomplete="disabled"
               v-model="newWork.name"
             >
               <template v-slot:prepend-inner>
-                <v-icon class="mr-3" size="24">mdi-account</v-icon></template
+                <v-icon class="mr-3" size="24" color="teal accent-3"
+                  >mdi-account</v-icon
+                ></template
               >
             </v-text-field>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="10">
             <v-text-field
               name="work"
               label="Work"
+              :rules="rules"
               color="green accent-2"
               autocomplete="disabled"
               v-model="newWork.work"
             >
               <template v-slot:prepend-inner>
-                <v-icon class="mr-3" size="24"
+                <v-icon class="mr-3" size="24" color="teal accent-3"
                   >mdi-desktop-mac</v-icon
                 ></template
               >
             </v-text-field>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="10">
             <v-text-field
               name="client"
               label="Client"
+              :rules="rules"
               color="green accent-2"
               autocomplete="disabled"
               v-model="newWork.client"
             >
               <template v-slot:prepend-inner>
-                <v-icon class="mr-3" size="24"
+                <v-icon class="mr-3" size="24" color="teal accent-3"
                   >mdi-comment-account</v-icon
                 ></template
               >
             </v-text-field>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="10">
             <v-text-field
               name="status"
               label="Status"
+              :rules="rules"
               color="green accent-2"
               autocomplete="disabled"
               v-model="newWork.status"
+              @keyup.enter="addWork"
             >
               <template v-slot:prepend-inner>
-                <v-icon class="mr-3" size="24">mdi-cogs</v-icon></template
+                <v-icon class="mr-3" size="24" color="teal accent-3"
+                  >mdi-cogs</v-icon
+                ></template
               >
             </v-text-field>
           </v-col>
@@ -81,15 +92,12 @@
       <!-- Action Buttons -->
       <v-container class="pt-0">
         <v-row justify="center">
-          <v-col cols="6" class="d-flex">
-            <v-btn
-              outlined
-              color="green accent-4"
-              @click="$refs.newForm.reset()"
-              >Reset</v-btn
-            >
+          <v-col cols="7" sm="6" class="d-flex">
+            <v-btn class="text-capitalize px-5" @click="resetForm">Reset</v-btn>
             <v-spacer></v-spacer>
-            <v-btn class="green accent-3 px-6" @click="addTask">Add</v-btn>
+            <v-btn class="green accent-2 px-6 text-capitalize" @click="addWork"
+              >Done</v-btn
+            >
           </v-col>
         </v-row>
       </v-container>
@@ -99,13 +107,23 @@
 
 <script>
 export default {
-  name: 'AddTask',
+  name: 'AddWork',
   data: () => ({
-    newWork: null
+    newWork: null,
+    rules: [value => !!value || 'Required']
   }),
+  props: {
+    reportId: {
+      type: String,
+      required: true
+    }
+  },
   methods: {
     closeDialog() {
       this.$emit('close')
+    },
+    resetForm() {
+      this.$refs.newForm.reset()
     },
     clearForm() {
       const work = {
@@ -116,10 +134,17 @@ export default {
       }
       this.newWork = work
     },
-    addTask() {
-      this.$store.dispatch('addWork', this.newWork)
-      this.closeDialog()
-      this.clearForm()
+    addWork() {
+      const valid = this.$refs.newForm.validate()
+      if (valid) {
+        this.$store.dispatch('addWork', {
+          reportId: this.reportId,
+          work: this.newWork
+        })
+        this.$refs.newForm.resetValidation()
+        this.closeDialog()
+        this.clearForm()
+      }
     }
   },
   created() {
@@ -127,5 +152,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped></style>
