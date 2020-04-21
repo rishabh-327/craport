@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-content>
-      <router-view />
+      <v-scroll-x-reverse-transition mode="out-in">
+        <router-view />
+      </v-scroll-x-reverse-transition>
     </v-content>
   </v-app>
 </template>
@@ -25,5 +27,19 @@ p {
 }
 .work-dialog {
   box-shadow: 0 2px 16px rgba(97, 83, 155, 0.212) !important;
+}
+
+// Transitions
+.slide-in-enter {
+  transform: translateX(16px);
+  opacity: 0;
+}
+.slide-in-enter-active,
+.slide-in-enter-active {
+  transition: all 0.5s ease-in;
+}
+.slide-in-leave-to {
+  transform: translateX(-16px);
+  opacity: 0;
 }
 </style>

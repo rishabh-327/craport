@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
-import Report from '@/views/Report/Report.vue'
-import EditWork from '@/views/Report/EditWork.vue'
 
 Vue.use(VueRouter)
 
@@ -15,13 +13,13 @@ const routes = [
   {
     path: '/report/:id',
     name: 'report',
-    component: Report,
+    component: () => import('@/views/Report/Report.vue'),
     props: true,
     children: [
       {
         path: '/edit/:workId',
         name: 'edit-work',
-        component: EditWork,
+        component: () => import('@/views/Report/EditWork.vue'),
         props: true
       }
     ]
