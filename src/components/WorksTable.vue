@@ -1,40 +1,41 @@
 <template>
   <v-container fluid px-0 mt-8>
     <v-row>
-      <!-- Headers -->
-      <v-col cols="12" class="pb-1" v-if="!isMobileScreen">
-        <v-row>
-          <v-col cols="1"></v-col>
-          <v-col :cols="editable ? 2 : 3"
-            ><p class="grey--text text--lighten-1 font-weight-medium">
-              Name
-            </p></v-col
-          >
-          <v-col cols="3"
-            ><p class="grey--text text--lighten-1 font-weight-medium">
-              Work
-            </p></v-col
-          >
-          <v-col cols="3"
-            ><p class="grey--text text--lighten-1 font-weight-medium">
-              Client
-            </p></v-col
-          >
-          <v-col cols="2"
-            ><p class="grey--text text--lighten-1 font-weight-medium">
-              Status
-            </p></v-col
-          >
-          <v-col cols="1" v-if="editable"
-            ><p class="grey--text text--lighten-1 font-weight-medium">
-              Action
-            </p></v-col
-          >
-        </v-row>
-      </v-col>
-
-      <!-- Works List -->
+      <!-- Table. Show only if there're works in list. -->
       <template v-if="worksList.length > 0">
+        <!-- Headers -->
+        <v-col cols="12" class="pb-1" v-if="!isMobileScreen">
+          <v-row>
+            <v-col cols="1"></v-col>
+            <v-col :cols="editable ? 2 : 3"
+              ><p class="grey--text text--lighten-1 font-weight-medium">
+                Name
+              </p></v-col
+            >
+            <v-col cols="3"
+              ><p class="grey--text text--lighten-1 font-weight-medium">
+                Work
+              </p></v-col
+            >
+            <v-col cols="3"
+              ><p class="grey--text text--lighten-1 font-weight-medium">
+                Client
+              </p></v-col
+            >
+            <v-col cols="2"
+              ><p class="grey--text text--lighten-1 font-weight-medium">
+                Status
+              </p></v-col
+            >
+            <v-col cols="1" v-if="editable"
+              ><p class="grey--text text--lighten-1 font-weight-medium">
+                Action
+              </p></v-col
+            >
+          </v-row>
+        </v-col>
+
+        <!-- Works List -->
         <v-col
           cols="12"
           class="pt-0"
